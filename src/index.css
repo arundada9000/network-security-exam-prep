@@ -111,7 +111,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -146,13 +146,18 @@
 
   .card-elevated {
     @apply bg-card text-card-foreground rounded-xl border border-border 
-           shadow-sm hover:shadow-md transition-shadow duration-200;
+           shadow-sm hover:shadow-md transition-all duration-200;
   }
 
   .card-interactive {
     @apply bg-card text-card-foreground rounded-xl border border-border 
            shadow-sm hover:shadow-lg hover:border-accent/50 
            transition-all duration-200 cursor-pointer;
+  }
+
+  .card-glass {
+    @apply bg-card/80 backdrop-blur-xl text-card-foreground rounded-2xl border border-border/50 
+           shadow-xl shadow-black/5;
   }
 
   .input-field {
@@ -189,10 +194,57 @@
   .option-incorrect {
     @apply border-2 border-destructive bg-destructive/10;
   }
+
+  /* Flashcard 3D styles */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Confetti animation */
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-confetti {
+    animation: confetti-fall 3s linear forwards;
+  }
+
+  /* Glow effects */
+  .glow-accent {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.3), 0 0 40px hsl(var(--accent) / 0.1);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px hsl(var(--success) / 0.3), 0 0 40px hsl(var(--success) / 0.1);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent/70;
   }
 }
